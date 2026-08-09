@@ -1,0 +1,80 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+          pip install -e .
+
+      - name: Lint
+        run: ruff check src tests scripts
+
+      - name: Test
+        # The suite runs entirely on synthetic data with known ground truth, so
+        # it needs no network access and cannot be broken by an upstream source
+        # changing its schema. Pipeline stages that do touch the network are
+        # exercised separately by the smoke job below.
+        run: pytest tests -q --cov=pandemic --cov-report=term-missing
+
+  smoke:
+    # Verifies the package imports and the CLI entry points are wired up.
+    # Deliberately does not download the ~150 MB of upstream data.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -e .
+      - name: Import every module
+        run: |
+          python - <<'PY'
+          import importlib, pkgutil
+          import pandemic
+          failed = []
+          for mod in pkgutil.walk_packages(pandemic.__path__, "pandemic."):
+              try:
+                  importlib.import_module(mod.name)
+              except Exception as exc:
+                  failed.append((mod.name, exc))
+          if failed:
+              for name, exc in failed:
+                  print(f"FAILED {name}: {exc}")
+              raise SystemExit(1)
+          print("all modules import cleanly")
+          PY
+      - name: Entry points respond to --help
+        run: |
+          for s in fetch_data run_forensics run_forecast run_causal run_capacity run_all; do
+            python scripts/$s.py --help > /dev/null || exit 1
+          done
+          echo "all stage scripts expose a working CLI"

@@ -1,0 +1,291 @@
+{
+  "n_countries_scored": 184,
+  "weight_sensitivity": {
+    "spearman_median": 0.9576881585791064,
+    "spearman_p05": 0.8802054477856329,
+    "bottom20_overlap_median": 0.8,
+    "bottom20_overlap_p05": 0.6,
+    "n_draws": 500
+  },
+  "least_reliable": [
+    {
+      "entity": "Antigua and Barbuda",
+      "reliability_index": 44.10352112090157,
+      "worst_component": "dump_rate",
+      "worst_component_desc": "batch releases of withheld cases"
+    },
+    {
+      "entity": "Monaco",
+      "reliability_index": 45.136070460248234,
+      "worst_component": "weekday_amp",
+      "worst_component_desc": "cases reported in weekday batches"
+    },
+    {
+      "entity": "Solomon Islands",
+      "reliability_index": 47.89267539045996,
+      "worst_component": "gap_severity",
+      "worst_component_desc": "reporting stopped mid-epidemic"
+    },
+    {
+      "entity": "Burundi",
+      "reliability_index": 49.11595106812254,
+      "worst_component": "dump_rate",
+      "worst_component_desc": "batch releases of withheld cases"
+    },
+    {
+      "entity": "Sudan",
+      "reliability_index": 49.52202570086747,
+      "worst_component": "gap_severity",
+      "worst_component_desc": "reporting stopped mid-epidemic"
+    },
+    {
+      "entity": "Guinea-Bissau",
+      "reliability_index": 49.718908123161874,
+      "worst_component": "gap_severity",
+      "worst_component_desc": "reporting stopped mid-epidemic"
+    },
+    {
+      "entity": "Papua New Guinea",
+      "reliability_index": 49.96040230255518,
+      "worst_component": "gap_severity",
+      "worst_component_desc": "reporting stopped mid-epidemic"
+    },
+    {
+      "entity": "Lesotho",
+      "reliability_index": 49.96842322927604,
+      "worst_component": "gap_severity",
+      "worst_component_desc": "reporting stopped mid-epidemic"
+    },
+    {
+      "entity": "San Marino",
+      "reliability_index": 51.03758038585209,
+      "worst_component": "gap_severity",
+      "worst_component_desc": "reporting stopped mid-epidemic"
+    },
+    {
+      "entity": "Djibouti",
+      "reliability_index": 51.116267781862135,
+      "worst_component": "weekday_amp",
+      "worst_component_desc": "cases reported in weekday batches"
+    }
+  ],
+  "most_reliable": [
+    {
+      "entity": "United Arab Emirates",
+      "reliability_index": 94.80007479783652
+    },
+    {
+      "entity": "Russia",
+      "reliability_index": 94.4354646418493
+    },
+    {
+      "entity": "Qatar",
+      "reliability_index": 92.6478620392176
+    },
+    {
+      "entity": "Iran",
+      "reliability_index": 91.60845236985179
+    },
+    {
+      "entity": "Japan",
+      "reliability_index": 90.98962697810924
+    },
+    {
+      "entity": "Cambodia",
+      "reliability_index": 90.84191715870408
+    },
+    {
+      "entity": "Cuba",
+      "reliability_index": 90.47955951818018
+    },
+    {
+      "entity": "Serbia",
+      "reliability_index": 90.15164922997475
+    },
+    {
+      "entity": "Rwanda",
+      "reliability_index": 89.76379323477414
+    },
+    {
+      "entity": "Sri Lanka",
+      "reliability_index": 89.2824426964921
+    }
+  ],
+  "naive_detector_benchmark": {
+    "India": {
+      "global_z": {
+        "n_flagged": 48,
+        "n_true": 0,
+        "precision": 0.0,
+        "by_mechanism": {
+          "trend": 48
+        }
+      },
+      "rolling_z": {
+        "n_flagged": 4,
+        "n_true": 0,
+        "precision": 0.0,
+        "by_mechanism": {
+          "trend": 4
+        }
+      },
+      "forensic_events": {
+        "n_events": 6,
+        "n_caught_by_zscore": 0,
+        "recall": 0.0
+      }
+    },
+    "United Kingdom": {
+      "global_z": {
+        "n_flagged": 15,
+        "n_true": 1,
+        "precision": 0.06666666666666667,
+        "by_mechanism": {
+          "weekday": 8,
+          "trend": 6,
+          "residual": 1
+        }
+      },
+      "rolling_z": {
+        "n_flagged": 10,
+        "n_true": 2,
+        "precision": 0.2,
+        "by_mechanism": {
+          "weekday": 6,
+          "trend": 2,
+          "dump": 2
+        }
+      },
+      "forensic_events": {
+        "n_events": 30,
+        "n_caught_by_zscore": 0,
+        "recall": 0.0
+      }
+    },
+    "Brazil": {
+      "global_z": {
+        "n_flagged": 22,
+        "n_true": 0,
+        "precision": 0.0,
+        "by_mechanism": {
+          "weekday": 17,
+          "trend": 5
+        }
+      },
+      "rolling_z": {
+        "n_flagged": 8,
+        "n_true": 0,
+        "precision": 0.0,
+        "by_mechanism": {
+          "weekday": 7,
+          "trend": 1
+        }
+      },
+      "forensic_events": {
+        "n_events": 6,
+        "n_caught_by_zscore": 0,
+        "recall": 0.0
+      }
+    },
+    "US": {
+      "global_z": {
+        "n_flagged": 27,
+        "n_true": 0,
+        "precision": 0.0,
+        "by_mechanism": {
+          "trend": 20,
+          "weekday": 7
+        }
+      },
+      "rolling_z": {
+        "n_flagged": 4,
+        "n_true": 0,
+        "precision": 0.0,
+        "by_mechanism": {
+          "weekday": 2,
+          "trend": 2
+        }
+      },
+      "forensic_events": {
+        "n_events": 1,
+        "n_caught_by_zscore": 0,
+        "recall": 0.0
+      }
+    }
+  },
+  "digit_test_target": "Egypt",
+  "excluded_insufficient_data": {
+    "n": 17,
+    "min_active_days": 180,
+    "most_irregular": [
+      {
+        "entity": "Antarctica",
+        "active_days": 0,
+        "peak_daily": 11.0,
+        "weekday_amplitude": NaN
+      },
+      {
+        "entity": "Comoros",
+        "active_days": 144,
+        "peak_daily": 275.0,
+        "weekday_amplitude": 1.044383015641055
+      },
+      {
+        "entity": "Diamond Princess",
+        "active_days": 30,
+        "peak_daily": 99.0,
+        "weekday_amplitude": NaN
+      },
+      {
+        "entity": "Holy See",
+        "active_days": 0,
+        "peak_daily": 7.0,
+        "weekday_amplitude": NaN
+      },
+      {
+        "entity": "Kiribati",
+        "active_days": 75,
+        "peak_daily": 1491.0,
+        "weekday_amplitude": 1.2435151515221594
+      },
+      {
+        "entity": "Korea, North",
+        "active_days": 0,
+        "peak_daily": 1.0,
+        "weekday_amplitude": NaN
+      },
+      {
+        "entity": "Liberia",
+        "active_days": 177,
+        "peak_daily": 447.0,
+        "weekday_amplitude": 1.468230948175149
+      },
+      {
+        "entity": "MS Zaandam",
+        "active_days": 0,
+        "peak_daily": 7.0,
+        "weekday_amplitude": NaN
+      },
+      {
+        "entity": "Marshall Islands",
+        "active_days": 46,
+        "peak_daily": 3130.0,
+        "weekday_amplitude": NaN
+      },
+      {
+        "entity": "Micronesia",
+        "active_days": 170,
+        "peak_daily": 3652.0,
+        "weekday_amplitude": 2.1352140055000777
+      }
+    ]
+  },
+  "totals": {
+    "countries_with_negative_days": 77,
+    "countries_with_reporting_gaps": 147,
+    "countries_with_constant_fill": 40,
+    "countries_with_significant_weekday": 145,
+    "countries_failing_benford": 131,
+    "countries_with_heaping": 1
+  }
+}

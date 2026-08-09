@@ -1,0 +1,8 @@
+-r requirements.txt
+
+# Lower bounds only: the test suite does not depend on behaviour that changed in
+# any recent major of these, and pinning the tooling tighter than the library
+# stack just makes CI fail for reasons unrelated to the project.
+pytest>=8.3         # tested 9.1.1
+pytest-cov>=6.0     # tested 7.1.0
+ruff>=0.9           # tested 0.16.2

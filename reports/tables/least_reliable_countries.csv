@@ -1,0 +1,11 @@
+entity,reliability_index,worst_component,worst_component_desc
+Antigua and Barbuda,44.10352112090157,dump_rate,batch releases of withheld cases
+Monaco,45.136070460248234,weekday_amp,cases reported in weekday batches
+Solomon Islands,47.89267539045996,gap_severity,reporting stopped mid-epidemic
+Burundi,49.11595106812254,dump_rate,batch releases of withheld cases
+Sudan,49.52202570086747,gap_severity,reporting stopped mid-epidemic
+Guinea-Bissau,49.718908123161874,gap_severity,reporting stopped mid-epidemic
+Papua New Guinea,49.96040230255518,gap_severity,reporting stopped mid-epidemic
+Lesotho,49.96842322927604,gap_severity,reporting stopped mid-epidemic
+San Marino,51.03758038585209,gap_severity,reporting stopped mid-epidemic
+Djibouti,51.116267781862135,weekday_amp,cases reported in weekday batches

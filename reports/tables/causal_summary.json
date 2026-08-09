@@ -1,0 +1,403 @@
+{
+  "dag": {
+    "n_nodes": 13,
+    "n_edges": 22,
+    "mediators_excluded": [
+      "observed_cases",
+      "testing",
+      "transmission",
+      "vaccination_speed"
+    ],
+    "minimal_adjustment_sets": [
+      [
+        "density",
+        "median_age",
+        "onset_growth",
+        "seeding_delay",
+        "wealth"
+      ]
+    ],
+    "chosen_adjustment_columns": [
+      "log_population_density",
+      "log_population",
+      "median_age",
+      "aged_65_older",
+      "life_expectancy",
+      "onset_growth_rate",
+      "seeding_delay_days",
+      "log_gdp_per_capita",
+      "human_development_index"
+    ]
+  },
+  "controls_used": [
+    "log_population_density",
+    "log_population",
+    "median_age",
+    "aged_65_older",
+    "life_expectancy",
+    "onset_growth_rate",
+    "seeding_delay_days",
+    "log_gdp_per_capita",
+    "human_development_index"
+  ],
+  "sample": {
+    "n_analysed": 148,
+    "n_designed": 175,
+    "n_dropped_missing": 27
+  },
+  "estimates": [
+    {
+      "method": "OLS, unadjusted",
+      "estimate": 0.0355159666182628,
+      "std_error": 0.010299314117215033,
+      "ci_low": 0.015329681883056393,
+      "ci_high": 0.055702251353469207,
+      "p_value": 0.0005639563923603606,
+      "n": 148,
+      "detail": {
+        "r_squared": 0.08543605316726788,
+        "n_controls": 0
+      }
+    },
+    {
+      "method": "OLS, back-door adjusted",
+      "estimate": 0.04439832161873061,
+      "std_error": 0.008305931180304963,
+      "ci_low": 0.028118995647264625,
+      "ci_high": 0.0606776475901966,
+      "p_value": 9.022976543818799e-08,
+      "n": 148,
+      "detail": {
+        "r_squared": 0.4900995709471768,
+        "n_controls": 9
+      }
+    },
+    {
+      "method": "Double ML (partialling out)",
+      "estimate": 0.034734510092045756,
+      "std_error": 0.008366205266910542,
+      "ci_low": 0.018336747768901093,
+      "ci_high": 0.051132272415190416,
+      "p_value": 3.2992234603655484e-05,
+      "n": 148,
+      "detail": {
+        "n_folds": 5,
+        "n_repeats": 5,
+        "theta_spread_iqr": 0.002702595844591045,
+        "outcome_r2": 0.37162943708208035,
+        "treatment_r2": 0.11770199223845065,
+        "n_controls": 9
+      }
+    },
+    {
+      "method": "IPW (median split, per point)",
+      "estimate": 0.02712938559903616,
+      "std_error": 0.01772602923270865,
+      "ci_low": -0.007613631697072791,
+      "ci_high": 0.06187240289514511,
+      "p_value": 0.1258972293927069,
+      "n": 148,
+      "detail": {
+        "cutoff": 78.61733333333333,
+        "raw_ate_median_split": 0.6346334401628662,
+        "mean_treatment_contrast": 23.392842342342362,
+        "n_treated": 74,
+        "ps_min": 0.07733359267366618,
+        "ps_max": 0.9295981414418911,
+        "effective_n": 114.71274846838709
+      }
+    }
+  ],
+  "identification": {
+    "response_channel": {
+      "lagged": {
+        "method": "stringency ~ pre-window case growth",
+        "estimate": -2.589379221458468,
+        "std_error": 1.134219278626503,
+        "ci_low": -4.812408158137415,
+        "ci_high": -0.3663502847795215,
+        "p_value": 0.022432621963421204,
+        "n": 148
+      },
+      "concurrent": {
+        "method": "stringency ~ outbreak size during the window",
+        "estimate": 2.2646885957741487,
+        "std_error": 1.053074638014084,
+        "ci_low": 0.20070023223398925,
+        "ci_high": 4.328676959314308,
+        "p_value": 0.031511815502798426,
+        "n": 148
+      },
+      "raw_correlation_lagged": -0.20369583984083117,
+      "raw_correlation_concurrent": 0.03799763019635256,
+      "reverse_causality_detected": true,
+      "interpretation": "treatment tracks the concurrent outbreak: policy and deaths are determined simultaneously, so adjusting for time-invariant covariates cannot identify the effect"
+    },
+    "effect_before_cause": {
+      "n": 148,
+      "main": {
+        "method": "OLS, adjusted",
+        "estimate": 0.04439832161873061,
+        "std_error": 0.008305931180304963,
+        "ci_low": 0.028118995647264625,
+        "ci_high": 0.0606776475901966,
+        "p_value": 9.022976543818799e-08,
+        "n": 148
+      },
+      "placebo_pre_period": {
+        "method": "OLS, adjusted",
+        "estimate": 0.01047769108421559,
+        "std_error": 0.0050607595562671345,
+        "ci_low": 0.0005587846195151021,
+        "ci_high": 0.020396597548916078,
+        "p_value": 0.038416852489688166,
+        "n": 148
+      },
+      "ratio_placebo_to_main": 0.23599295428760753,
+      "identification_compromised": false,
+      "interpretation": "no detectable association on the pre-causal window, which is what a credible causal estimate requires"
+    },
+    "naive_estimate": {
+      "method": "Double ML (partialling out)",
+      "estimate": 0.034734510092045756,
+      "std_error": 0.008366205266910542,
+      "ci_low": 0.018336747768901093,
+      "ci_high": 0.051132272415190416,
+      "p_value": 3.2992234603655484e-05,
+      "n": 148
+    },
+    "identified": false,
+    "verdict": "The design does NOT identify a causal effect. Treatment is assigned in response to the outbreak, and the association reproduces on a window the policy could not have affected. The reported coefficient is a measure of which countries were already in trouble when they acted -- reporting it as the effect of policy would invert the direction of the real relationship. Identification requires variation in policy that is unrelated to local epidemic severity: staggered adoption with matched pre-trends, a discontinuity, or an instrument.",
+    "power_caveat": "Both probes are one-sided: they can reveal confounding but cannot demonstrate its absence. The sign of the estimate is the stronger evidence here -- a positive coefficient means stricter responses accompany higher mortality, which is implausible as a causal effect and expected under simultaneity."
+  },
+  "refutation": {
+    "estimate": {
+      "method": "Double ML (partialling out)",
+      "estimate": 0.034734510092045756,
+      "std_error": 0.008366205266910542,
+      "ci_low": 0.018336747768901093,
+      "ci_high": 0.051132272415190416,
+      "p_value": 3.2992234603655484e-05,
+      "n": 148
+    },
+    "contrast_points": 10.0,
+    "risk_ratio_per_contrast": 1.415305064182873,
+    "placebo_treatment": {
+      "n": 40,
+      "placebo_mean": 0.0009089664112511938,
+      "placebo_sd": 0.007243261053922824,
+      "placebo_abs_p95": 0.012266695828498209,
+      "observed": 0.034734510092045756,
+      "permutation_p": 0.024390243902439025,
+      "passes": true
+    },
+    "random_common_cause": {
+      "n": 30,
+      "mean_estimate": 0.03500985907742623,
+      "observed": 0.034734510092045756,
+      "mean_shift": 0.0002753489853804733,
+      "relative_shift": 0.007927245400922715,
+      "passes": true
+    },
+    "subset_stability": {
+      "n": 60,
+      "fraction": 0.8,
+      "mean_estimate": 0.03485511575320161,
+      "p2.5": 0.025261601317836998,
+      "p97.5": 0.04376363535910844,
+      "observed": 0.034734510092045756,
+      "sign_consistency": 1.0,
+      "passes": true
+    },
+    "leave_one_group_out": {
+      "n": 6,
+      "by_group": {
+        "Africa": 0.043128209117415106,
+        "Asia": 0.02017679477229713,
+        "Europe": 0.026652975446432168,
+        "North America": 0.036643059036381834,
+        "Oceania": 0.03552767707162412,
+        "South America": 0.03357510888555003
+      },
+      "min": 0.02017679477229713,
+      "max": 0.043128209117415106,
+      "observed": 0.034734510092045756,
+      "sign_consistency": 1.0,
+      "passes": true
+    },
+    "e_value": {
+      "risk_ratio": 1.415305064182873,
+      "e_value": 2.181975371758961,
+      "e_value_ci": 1.692946358776745,
+      "ci": [
+        1.2012557616732757,
+        1.6674953732679765
+      ]
+    },
+    "n_checks_passed": 4,
+    "n_checks": 4
+  },
+  "population_scaling": {
+    "countries_beds_vs_cases": {
+      "n": 155,
+      "x": "total_hospital_beds",
+      "y": "total_cases_1y",
+      "raw": {
+        "r": 0.1931583475963966,
+        "p": 0.016037583386788345,
+        "r_squared": 0.03731014724617038
+      },
+      "partial_given_log_population": {
+        "r": 0.06926220123416633,
+        "p": 0.3933576313976064
+      },
+      "per_capita": {
+        "r": 0.3173446833143522,
+        "p": 5.73566291425992e-05
+      },
+      "x_vs_population_r": 0.7594230926388118,
+      "y_vs_population_r": 0.38769429579381515,
+      "variance_explained_lost": 0.03251289472636822,
+      "verdict": "the association survives population adjustment"
+    },
+    "mechanical_demo": {
+      "n_regions": 155,
+      "assumed_attack_rate": 0.2,
+      "r_beds_vs_projected_constant_rate": 0.7594230926388118,
+      "r_beds_vs_projected_varying_rate": 0.8539274356523676,
+      "r_if_bed_density_identical": 1.0,
+      "r_beds_vs_population": 0.7594230926388118,
+      "note": "Both columns contain population as a factor. The correlation is a property of the population distribution, not of hospital capacity, and survives even large variation in the assumed attack rate."
+    }
+  },
+  "india": {
+    "trio": [
+      {
+        "entity": "Delhi",
+        "cases_per_million": 69730.63106796116,
+        "deaths_per_million": 1216.4077669902913,
+        "case_fatality_pct": 1.7444382022080809
+      },
+      {
+        "entity": "Maharashtra",
+        "cases_per_million": 51349.04955320877,
+        "deaths_per_million": 1082.1608448415923,
+        "case_fatality_pct": 2.1074603215785688
+      },
+      {
+        "entity": "Karnataka",
+        "cases_per_million": 43046.71597633136,
+        "deaths_per_million": 542.2633136094674,
+        "case_fatality_pct": 1.259708903015095
+      }
+    ],
+    "top_10_by_deaths_per_million": [
+      {
+        "entity": "Delhi",
+        "deaths_per_million": 1216.4077669902913,
+        "cases_per_million": 69730.63106796116,
+        "case_fatality_pct": 1.7444382022080809
+      },
+      {
+        "entity": "Maharashtra",
+        "deaths_per_million": 1082.1608448415923,
+        "cases_per_million": 51349.04955320877,
+        "case_fatality_pct": 2.1074603215785688
+      },
+      {
+        "entity": "Uttarakhand",
+        "deaths_per_million": 646.140350877193,
+        "cases_per_million": 30021.57894736842,
+        "case_fatality_pct": 2.152253057742092
+      },
+      {
+        "entity": "Karnataka",
+        "deaths_per_million": 542.2633136094674,
+        "cases_per_million": 43046.71597633136,
+        "case_fatality_pct": 1.259708903015095
+      },
+      {
+        "entity": "Punjab",
+        "deaths_per_million": 541.4950166112957,
+        "cases_per_million": 19907.109634551492,
+        "case_fatality_pct": 2.720108677512166
+      },
+      {
+        "entity": "Manipur",
+        "deaths_per_million": 513.5483870967741,
+        "cases_per_million": 32457.741935483868,
+        "case_fatality_pct": 1.5822061439688329
+      },
+      {
+        "entity": "Kerala",
+        "deaths_per_million": 479.10364145658264,
+        "cases_per_million": 96614.81792717088,
+        "case_fatality_pct": 0.4958904355828061
+      },
+      {
+        "entity": "Himachal Pradesh",
+        "deaths_per_million": 470.73825503355704,
+        "cases_per_million": 27730.06711409396,
+        "case_fatality_pct": 1.6975734429229048
+      },
+      {
+        "entity": "Chhattisgarh",
+        "deaths_per_million": 460.2040816326531,
+        "cases_per_million": 34102.040816326524,
+        "case_fatality_pct": 1.3494913225613405
+      },
+      {
+        "entity": "Tamil Nadu",
+        "deaths_per_million": 439.0616966580977,
+        "cases_per_million": 32974.96143958869,
+        "case_fatality_pct": 1.3315002580441966
+      }
+    ],
+    "scaling_diagnostic": {
+      "n": 26,
+      "x": "cases",
+      "y": "deaths",
+      "raw": {
+        "r": 0.9052603847417532,
+        "p": 2.1123186290799958e-10,
+        "r_squared": 0.819496364182787
+      },
+      "partial_given_log_population": {
+        "r": 0.8860860294479525,
+        "p": 3.835601437900349e-09
+      },
+      "per_capita": {
+        "r": 0.7044836232988873,
+        "p": 5.886929762906828e-05
+      },
+      "x_vs_population_r": 0.46368266211956594,
+      "y_vs_population_r": 0.4290005934106862,
+      "variance_explained_lost": 0.034347912599949404,
+      "verdict": "the association survives population adjustment"
+    },
+    "synthetic_control": {
+      "treated": "Maharashtra",
+      "intervention": "2021-04-05",
+      "post_days": 21,
+      "donor_weights": {
+        "Chhattisgarh": 0.543,
+        "Punjab": 0.3516,
+        "Kerala": 0.0888,
+        "Delhi": 0.0165
+      },
+      "pre_rmspe": 124.40519231223612,
+      "post_rmspe": 116.7440552218173,
+      "rmspe_ratio": 0.938417867067874,
+      "effect_mean_pct": 25.883652434928766,
+      "placebo_p_value": 1.0,
+      "n_placebos": 25,
+      "placebo_in_time": {
+        "fake_intervention": "2021-02-19",
+        "rmspe_ratio": 1.5946994023317411,
+        "effect_mean_pct": 66.36810588873188
+      },
+      "caveat": "Other large states restricted within three weeks of the treated date, so the donor pool is only clean for a 21-day post-window. This bounds what the design can detect and is reported rather than worked around.",
+      "verdict": "NULL RESULT, and the design does not support interpreting it. The post/pre RMSPE ratio is 0.94 and ranks 26 of 26 placebos (p = 1.00); a fake intervention 45 days earlier produces a *larger* apparent effect (ratio 1.59). With a 21-day post-window forced by donor contamination and a pre-period fit that is not tight, this design lacks the power to detect a plausible effect. It is reported as a failed identification attempt rather than as evidence of no effect."
+    }
+  }
+}
