@@ -33,6 +33,10 @@ vaccination and drops to 0.56 after, which is what its own assumptions predict.
 | [Reproducing](#reproducing) | One command, or one per stage |
 | [Engineering](#engineering) | Tests, CI, layout |
 
+New to any of the methods here? [**docs/WALKTHROUGH.md**](docs/WALKTHROUGH.md)
+explains the whole project and every important function in plain language, with
+the actual code alongside. No prior knowledge assumed.
+
 ---
 
 ## How it's built
