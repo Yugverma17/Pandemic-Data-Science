@@ -37,6 +37,11 @@ New to any of the methods here? [**docs/WALKTHROUGH.md**](docs/WALKTHROUGH.md)
 explains the whole project and every important function in plain language, with
 the actual code alongside. No prior knowledge assumed.
 
+Preparing to talk about this project out loud?
+[**docs/STUDY_NOTES.md**](docs/STUDY_NOTES.md) has every concept used here
+explained simply, plus interview questions with full answers for SDE, ML, and
+data science roles.
+
 ---
 
 ## How it's built
