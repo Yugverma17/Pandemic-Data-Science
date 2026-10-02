@@ -159,10 +159,14 @@ reporting in 2022, and the dump detector flags that 27 times.
 | Significant weekday batching | 145 |
 | Benford non-conformity | 131 |
 
-One thing worth flagging: **17 countries were excluded** for having too few
-active reporting days to score at all. Tanzania and Nicaragua are on that list.
-So the countries with the worst data are the ones the index can't rank. That's a
-real hole, and the exclusion list is published alongside the scores.
+One thing worth flagging: **17 countries and territories were excluded** for
+having fewer than 180 active reporting days, so there was nothing for the
+detectors to work on. They are mostly ships, tiny territories and places with
+almost no reported epidemic (Diamond Princess, Holy See, Antarctica, North Korea,
+Kiribati, Marshall Islands). Being unscored is not a clean bill of health, it
+just means the index has no opinion, and the exclusion list is published
+alongside the scores. Tanzania and Nicaragua, whose reporting is the strangest in
+the set, were scored (60.5 and 60.1) and sit in the lower part of the ranking.
 
 ---
 

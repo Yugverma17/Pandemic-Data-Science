@@ -824,12 +824,15 @@ evidence you do not need to".
             continue
 ```
 
-**17 countries could not be scored at all** because they reported too little.
-Tanzania and Nicaragua are among them.
+**17 countries and territories could not be scored at all** because they had
+fewer than 180 "active" days. They are mostly cruise ships, tiny territories and
+places with almost no reported epidemic (Diamond Princess, Holy See, Antarctica,
+North Korea, Kiribati, Marshall Islands).
 
-So the countries with the *worst* data are the ones the index cannot rank. That
-is a real weakness. Rather than quietly dropping them, the code keeps the list
-and publishes it.
+Not being scored is not the same as having good data, it just means the index has
+no opinion about them. Rather than quietly dropping them, the code keeps the list
+and publishes it. (Tanzania and Nicaragua, which have the oddest reporting
+patterns, did have enough active days and were scored.)
 
 ---
 

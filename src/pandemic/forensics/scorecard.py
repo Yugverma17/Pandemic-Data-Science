@@ -61,9 +61,9 @@ def build_scorecard(panel: pd.DataFrame, *, value_col: str = "new_cases",
         g = g.sort_values("date")
         stats_ = summarise_country(g, value_col=value_col, n_permutations=n_permutations)
         if stats_["active_days"] < min_active_days:
-            # Not a pass: a country that barely reported cannot be *scored*, but
-            # that silence is itself a finding, so it is recorded rather than
-            # dropped. Tanzania and Nicaragua land here.
+            # Not a pass: a country with almost no active days cannot be *scored*,
+            # but being unscored is not a clean bill of health, so it is recorded
+            # rather than dropped (ships, tiny territories, North Korea).
             excluded.append({
                 "entity": entity,
                 "active_days": stats_["active_days"],
