@@ -1283,9 +1283,11 @@ real number this project produced, not a placeholder.
 > country-level policy timing is too tangled up with country-level severity to
 > ever separate cleanly. I'd want district-level data with genuinely staggered
 > policy rollout dates, which would support a proper difference-in-differences
-> design. Second, the forecast models only really add value when cases are
-> falling. I'd want to try a model that explicitly detects regime changes,
-> rather than one that averages over all of them.
+> design. Second, the forecast skill fades with horizon: at 7 days the models
+> beat persistence in every regime, but at 14 days the gain is only about 6%
+> while cases are growing and zero when they're flat. I'd want to try a model
+> that explicitly detects regime changes, rather than one that averages over
+> all of them.
 
 ---
 
@@ -1703,16 +1705,17 @@ you understand it or memorised it. Here are the harder versions.
 > pre-trends, which is a real, buildable next step, rather than forcing a
 > technique the data can't actually support.
 
-### "Your forecast model only beats the baseline when cases are falling. Isn't that a pretty weak result to headline?"
+### "Is a 23% improvement over a persistence baseline really meaningful?"
 
-> It would be weak if I'd hidden it, but the point of reporting the breakdown by
-> regime was specifically to not let the aggregate number hide it. The
-> aggregate, 23% better at 7 days, is technically true and would be an easy
-> thing to lead with, but it's mostly driven by the easy case, extrapolating a
-> decline. I split results by whether cases were growing, flat, or falling
-> specifically to find out whether that was true, and it was. I'd rather ship a
-> forecast with an honestly narrow claim, it helps meaningfully when cases are
-> declining, than an inflated one that implies uniform 23% improvement everywhere.
+> It's real but uneven, and I broke it down so the average doesn't hide that.
+> At 7 days the best model beats persistence in every regime: about 50% lower
+> error when cases are falling, 27% when they're growing, and under 5% when
+> they're flat. At 14 days it's 48% when falling, 6% when growing, and nothing
+> when flat. So the headline 23% is a blend of a big win on declines and a
+> small one elsewhere, and the edge shrinks as the horizon grows. One more
+> caution: I label the regime after the fact from what actually happened, so
+> a forecaster couldn't know it in advance. It tells you where skill sits, not
+> a rule you could act on live.
 
 ### "How do you know your synthetic control failure isn't just a mistake in your code?"
 

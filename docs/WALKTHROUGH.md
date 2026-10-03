@@ -44,7 +44,7 @@ The four questions:
 | # | Question | Short answer |
 |---|---|---|
 | 1 | Can we spot mistakes in the reported data? | Yes, and the popular method for doing it doesn't work |
-| 2 | Can we predict what happens next? | A bit, but only when cases are falling |
+| 2 | Can we predict what happens next? | Yes at 7 days, much less at 14, and best when cases are falling |
 | 3 | Why did some places do better? | This data cannot tell us, and here is the proof |
 | 4 | Which hospitals need more beds? | Yes, with about 13 days of warning |
 
@@ -1261,18 +1261,24 @@ is not forecasting, it is dividing by noise.
 
 This is where the project undercuts its own good news.
 
-| Situation | Best model scores |
-|---|---|
-| Cases **falling** | **0.52** (excellent) |
-| Cases **growing** | 0.94 (barely helps) |
-| Cases **flat** | worse than doing nothing |
+| Situation | Best model at 7 days | Best model at 14 days |
+|---|---|---|
+| Cases **falling** | **0.49** | **0.52** |
+| Cases **growing** | 0.73 | 0.94 |
+| Cases **flat** | 0.96 | 1.04 (worse than doing nothing) |
 
-Nearly all the headline 23% improvement comes from predicting **declines**. When
-cases are actually **rising**, which is the only time a forecast changes a
-decision, the best model beats guessing by about 6%.
+(Lower is better, 1.0 means "same as persistence".)
 
-Most people would never look. This looks, finds the disappointing answer, and
-publishes it.
+The skill is biggest when cases are **falling**, about half the error of the
+baseline at both horizons. When cases are **rising**, the gain is solid at 7 days
+(27%) but nearly vanishes at 14 days (6%). When cases are flat, models barely beat
+the baseline at 7 days and lose to it at 14.
+
+One caution: these labels are decided after the fact, from what actually happened,
+so a forecaster can't know the regime in advance. The table shows where skill
+sits, not a rule you could use live.
+
+Most people would never look. This looks and publishes what it finds.
 
 ---
 

@@ -12,9 +12,9 @@ Twice it said the data cannot support the answer. Those are in the results too.
 
 **The short version.** The standard z-score anomaly detector gets about 1% of its
 flags right and misses every real reporting failure. A renewal-equation model
-beats a persistence baseline by 23% on Weighted Interval Score, but nearly all of
-that comes from epidemics that were already shrinking. Nothing beats persistence
-while cases grow. The cross-country lockdown effect passes every robustness check
+beats a persistence baseline by 23% on Weighted Interval Score at 7 days. The gain
+is largest when epidemics are shrinking, and at 14 days it nearly disappears while
+cases are growing. The cross-country lockdown effect passes every robustness check
 I threw at it and is still not causal. A cases-to-ICU model hits r = 0.94 before
 vaccination and drops to 0.56 after, which is what its own assumptions predict.
 
@@ -127,7 +127,10 @@ because it needs no assumption about the underlying process at all.
 Egypt has the strongest final-digit signal in the set: chi-square **p = 6.8e-22**
 against uniformity, plus Benford non-conformity at MAD 0.041. A final digit
 carries no information in a real count, so a distribution this skewed means the
-numbers were rounded, estimated or typed rather than counted.
+numbers weren't produced by plain counting. It is not the classic rounding
+pattern, though: Egypt's 0s and 5s are under-represented. Syria is the one
+country that does show rounding, with about 40% of its numbers ending in 0 or 5
+against 20% expected.
 
 This flags a series for a look. It is not evidence of fabrication, and Benford
 (the weaker test) gets the lowest weight of the seven.
@@ -210,21 +213,26 @@ doing nothing.
   <img src="reports/figures/forecast_regime_skill.light.png" alt="Model skill split by epidemic regime">
 </picture>
 
-Split the 14-day results by what the epidemic was doing and the headline falls
-apart:
+Splitting the results by what the epidemic was doing shows where the 23% comes
+from. The numbers are the best model's relative WIS in each case (lower is better,
+1.0 is persistence):
 
-| Regime | Best model | rel. WIS |
+| Regime | 7-day horizon | 14-day horizon |
 |---|---|---|
-| Receding | Renewal / R_t, damped | **0.523** |
-| Growing | Gradient boosting | 0.936 |
-| Flat | none beat persistence | ≥ 1.000 |
+| Receding | **0.49** | **0.52** |
+| Growing | 0.73 | 0.94 |
+| Flat | 0.96 | 1.04 (nothing beats persistence) |
 
-Almost all the measured skill is in declining epidemics, where the renewal model
-correctly extrapolates decay. When cases are **growing**, which is the only time
-a forecast changes a decision, the best model improves on persistence by 6%. In
-flat periods every model is worse than doing nothing.
+Skill is largest when cases are falling, where the renewal model correctly
+extrapolates decay, at about half the error of persistence at both horizons. When
+cases are **growing**, the gain is solid at 7 days (27%) but almost gone at 14 days
+(6%). In flat periods the best model only just beats persistence at 7 days and
+loses to it at 14. An average over all conditions hides this.
 
-An average over all conditions hides this entirely.
+One caution: the regime is assigned after the fact, from what actually happened
+(target level below 0.8 of today's is "receding", 0.8 to 1.25 "flat", above 1.25
+"growing"). A forecaster can't know it in advance, so this shows where skill sits,
+not a rule you could apply live.
 
 ### The intervals are too narrow, and I measured by how much
 
