@@ -143,12 +143,13 @@ def estimate_ladder(rows: list[dict], placebo_row: dict | None = None):
         ax.grid(axis="x", color=p.grid, lw=0.7)
         ax.set_xlabel("Effect on log deaths per million, per stringency point")
 
-        title(ax, "Every estimator agrees -- and that is the problem",
+        title(ax, "The estimators agree on the sign, and that is the problem",
               "The falsification test (red) uses an outcome the policy could not have "
-              "affected, and reproduces the same association.", palette=p)
+              "affected, and shows a smaller association of the same sign.", palette=p)
         fig.tight_layout()
         footnote(fig, "A positive coefficient means stricter response is associated with "
-                      "MORE deaths, which is reverse causality, not effect.", p)
+                      "MORE deaths. That is more plausibly reverse causality than a harmful "
+                      "effect, but this design cannot prove which.", p)
 
     return draw
 

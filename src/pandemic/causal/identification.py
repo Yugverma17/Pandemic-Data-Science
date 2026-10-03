@@ -40,9 +40,10 @@ def response_channel(df: pd.DataFrame, treatment: str, controls: list[str],
     Two probes, because they have very different power:
 
     ``lagged``      treatment against case growth measured *before* the window
-                    opened. Weak by construction -- at the 100th case almost every
-                    country still has a tiny, noisy series, so a null here is
-                    uninformative rather than reassuring.
+                    opened. The series are short and noisy at the 100th case, so
+                    this is a weak probe. A positive, significant result would
+                    suggest governments reacted to earlier growth. In this data it
+                    is significant but negative, which does not support that story.
     ``concurrent``  treatment against the outbreak size *during* the window. This
                     is what governments were actually watching. It cannot separate
                     cause from effect on its own -- restrictions also change case
@@ -119,8 +120,8 @@ def effect_before_cause(df: pd.DataFrame, treatment: str, controls: list[str],
             "the estimate on the pre-causal window is of comparable size and the "
             "same sign, so the headline association is confounding rather than effect"
             if contaminated else
-            "no detectable association on the pre-causal window, which is what a "
-            "credible causal estimate requires"
+            "the association on the pre-causal window is small relative to the main "
+            "estimate (below the contamination cut-off), though not necessarily zero"
         ),
     }
 

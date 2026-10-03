@@ -346,18 +346,20 @@ whether an estimate is *stable*. They say nothing about whether it's
 stable, survives every placebo, and carries a respectable E-value.
 
 So I tested identification directly. Regressing treatment on the outbreak size
-*during* the policy window gives **+2.26 (p = 0.032)**. Governments clamped down
-harder where the epidemic was worse. Treatment and outcome are decided at the
-same time by the same thing, and no amount of adjusting for fixed country traits
-separates them.
+*during* the policy window gives **+2.26 (p = 0.032)**: stringency was higher
+where the epidemic was bigger. That fits governments clamping down harder where
+things were worse, and if so, treatment and outcome are decided at the same time
+by the same thing, which adjusting for fixed country traits cannot separate. The
+evidence is suggestive rather than airtight (see Limitations).
 
 The pipeline writes its own verdict:
 
 > The design does NOT identify a causal effect. […] The reported coefficient is a
 > measure of which countries were already in trouble when they acted.
 
-The positive sign is the giveaway. Reading +0.035 as "lockdowns increased deaths"
-points the arrow backwards.
+A positive sign is hard to read as "lockdowns increased deaths", and much easier
+to read as reverse causality. The honest conclusion is not "lockdowns don't work",
+it's that this design cannot tell us either way.
 
 ### The comparison the brief asks for
 
@@ -488,12 +490,24 @@ can only agree with the suspicion behind it isn't a diagnostic. The problem it
 does catch is narrower: it shows up when one variable is *defined* as a share of
 population, which `mechanical_scaling_demo` builds explicitly.
 
-**One of the two identification probes has no power.** The lagged probe tests
-case growth *before* the policy window, when nearly every country still has a
-short and noisy series, so its null means nothing. The concurrent probe, outbreak
-size *during* the window, is the one that can detect simultaneity, and it fires
-at p = 0.032. Both are reported with the caveat that they can reveal confounding
-but never rule it out.
+**The identification checks are mixed, and the verdict leans on one borderline
+probe.** Three checks look at whether the policy was driven by the outbreak:
+
+- *Outbreak size during the window* against stringency: **+2.26, p = 0.032**. This
+  is the probe that triggers the "not identified" verdict. Even this one cannot
+  separate cause from effect alone, since restrictions also change case counts.
+- *Case growth before the window* against stringency: **−2.59, p = 0.022**. It is
+  significant but the **opposite sign**: countries with faster early growth went on
+  to adopt less strict policy. That does not support "governments reacted to
+  earlier growth", and I don't have a clean explanation for it.
+- *Deaths in the first 21 days* (which policy could not have prevented) against
+  stringency: **+0.0105, p = 0.038**, about a quarter the size of the main
+  effect. It falls under my 0.3 cut-off for flagging contamination, but it is not
+  zero.
+
+So the design is not clean, the probes do not agree, and none of them can rule
+confounding out. The one firm conclusion is that this cross-country design cannot
+identify the effect.
 
 **The synthetic control is a null on a design that can't be read.** Covered above,
 including the figure that shows why.

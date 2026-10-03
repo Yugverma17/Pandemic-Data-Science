@@ -88,13 +88,17 @@ altered by differential under-recording — which is exactly the kind of
 state-varying data-quality problem the forensics stage detects, but the state-level
 series are too short to score reliably.
 
-**The identification probes are one-sided.** They can reveal confounding but
-cannot demonstrate its absence. A probe restricted to case growth *before* the
-policy window returns a null for a trivial reason — at the 100th case nearly every
-country still has a short, noisy series, so there is nothing for the test to
-detect. The concurrent probe, outbreak size *during* the window, is the one with
-power, and it fires (p = 0.032). Both are reported, because a null from an
-underpowered test is not evidence of anything.
+**The identification probes are one-sided and they disagree.** They can reveal
+confounding but cannot demonstrate its absence. The concurrent probe (outbreak
+size *during* the window) is positive and significant (+2.26, p = 0.032) and is
+what drives the "not identified" verdict. The lagged probe (case growth *before*
+the window) is also significant (p = 0.022) but negative (−2.59): faster early
+growth went with *less* strict later policy, which is the opposite of the
+reverse-causality story and is not explained here. The 21-day falsification
+outcome shows a small positive association (+0.0105, p = 0.038, about 24% of the
+main effect), below the 0.3 ratio used to flag contamination. The verdict
+therefore rests on one borderline probe, and should be read as "this design
+cannot identify the effect", not as proof of a specific bias.
 
 **The panel GBM is refit only every 56 days.** A model refit at every origin
 might perform better. This is a compute trade-off, stated rather than hidden; the
